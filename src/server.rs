@@ -1,18 +1,16 @@
 use std::{
     fs,
     io::{prelude::*, BufReader},
-    net::{IpAddr, SocketAddr, TcpListener, TcpStream},
+    net::{IpAddr, TcpListener, TcpStream},
 };
 pub struct Server {
     pub addr: IpAddr,
     pub port: u16,
 }
 impl Server {
-    pub fn start_server(&self) {
-        let socket = SocketAddr::new(self.addr, self.port);
-
-        let listener = TcpListener::bind(socket).unwrap();
-        println!("server start on host {} and port {}", self.addr, self.port);
+    pub fn start_server() {
+        let listener = TcpListener::bind("0.0.0.0:7878").unwrap();
+        println!("server started");
 
         for stream in listener.incoming() {
             let stream = stream.unwrap();
@@ -44,7 +42,7 @@ impl Server {
         if req_line == index {
             ("HTTP/1.1 200 OK", "www/views/index.html")
         } else if req_line == admin_panel {
-            ("HTTP/1.1 404 NOT FOUND", "www/views/admin.html")
+            ("HTTP/1.1 200 OK", "www/views/admin.html")
         } else if req_line == personal_cabinet {
             ("HTTP/1.1 200 OK", "www/views/personal.html")
         } else {
