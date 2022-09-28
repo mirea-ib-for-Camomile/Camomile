@@ -3,4 +3,3 @@ COPY . .
 RUN cargo build --release
 EXPOSE 7878
 CMD ["./target/release/camomile"]
-#FIXME: not run, but build
