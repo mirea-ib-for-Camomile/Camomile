@@ -4,3 +4,4 @@ services:
     build: ./server
     ports:
       - "8000:5000"
+#TODO:после добавить сервер
