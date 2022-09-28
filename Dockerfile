@@ -1,5 +1,6 @@
-FROM rust:1.64
-COPY ./ ./
+FROM rust:1.64-alpine3.16
+COPY . .
 RUN cargo build --release
-CMD ["./target/release/holodeck"]
+EXPOSE 7878
+CMD ["./target/release/camomile"]
 #FIXME: not run, but build
