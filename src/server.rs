@@ -42,7 +42,7 @@ impl Server {
         if req_line == index {
             ("HTTP/1.1 200 OK", "www/views/index.html")
         } else if req_line == admin_panel {
-            ("HTTP/1.1 404 NOT FOUND", "www/views/admin.html")
+            ("HTTP/1.1 200 OK", "www/views/admin.html")
         } else if req_line == personal_cabinet {
             ("HTTP/1.1 200 OK", "www/views/personal.html")
         } else {
