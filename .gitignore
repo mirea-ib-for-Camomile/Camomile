@@ -12,6 +12,7 @@ Cargo.lock
 
 # Added by cargo
 
-/target
+scanner/target
+server/target
 
 .vscode
