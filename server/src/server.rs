@@ -15,7 +15,7 @@ impl Server {
         for stream in listener.incoming() {
             let stream = stream.unwrap();
             Self::handle_connection(stream);
-            println!("new connection!");
+            println!("new connection!\n{:?}\n\n", listener);
         }
     }
 
@@ -29,6 +29,7 @@ impl Server {
         let lenght = contents.len();
 
         let response = format!("{status_line}\r\nContent-Lenght: {lenght}\r\n\r\n{contents}");
+        println!("{:?}",response);
         stream.write_all(response.as_bytes()).unwrap();
     }
 
@@ -40,13 +41,13 @@ impl Server {
         //FIXME: через match было бы удобнее
 
         if req_line == index {
-            ("HTTP/1.1 200 OK", "www/views/index.html")
+            ("HTTP/1.1 200 OK", "server/www/views/index.html")
         } else if req_line == admin_panel {
-            ("HTTP/1.1 200 OK", "www/views/admin.html")
+            ("HTTP/1.1 200 OK", "server/www/views/admin.html")
         } else if req_line == personal_cabinet {
-            ("HTTP/1.1 200 OK", "www/views/personal.html")
+            ("HTTP/1.1 200 OK", "server/www/views/personal.html")
         } else {
-            ("HTTP/1.1 404 NOT FOUND", "www/views/404.html")
+            ("HTTP/1.1 404 NOT FOUND", "server/www/views/404.html")
         }
     }
 }

@@ -1,4 +1,4 @@
-FROM rust:1.64-alpine3.16
+FROM rust:1.65-alpine3.16
 COPY . .
 RUN cargo build --release
 EXPOSE 7878
