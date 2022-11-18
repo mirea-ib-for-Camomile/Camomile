@@ -16,3 +16,4 @@ scanner/target
 server/target
 
 .vscode
+.devcontainer
