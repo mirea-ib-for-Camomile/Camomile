@@ -1,0 +1,29 @@
+.container {
+  width: 1000px;
+  height: 800px;
+  background: rgb(190, 178, 201);
+  margin-top: 100px;
+}
+
+.box {
+  width: 1000px;
+  height: 230px;
+  background: rgb(87, 19, 150);
+  margin-top: 100px;
+}
+
+h1 {
+  font-size: 500%;
+  text-align: left;
+  color: greenyellow;
+}
+h2 {
+  font-size: 100%;
+  text-align: right;
+  color: greenyellow;
+}
+.menu {
+  text-align: left;
+  color: rgb(87, 19, 150);
+  font-size: 40px;
+}
