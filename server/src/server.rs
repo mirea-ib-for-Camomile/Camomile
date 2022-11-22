@@ -22,32 +22,38 @@ impl Server {
     fn handle_connection(mut stream: TcpStream) {
         let buf_reader = BufReader::new(&mut stream);
         let request_line = buf_reader.lines().next().unwrap().unwrap();
-
+        println!("req_line:\n{:?}\n",request_line);
         let (status_line, filename) = Self::routing(request_line);
 
         let contents = fs::read_to_string(filename).unwrap();
         let lenght = contents.len();
 
         let response = format!("{status_line}\r\nContent-Lenght: {lenght}\r\n\r\n{contents}");
-        println!("{:?}",response);
+        println!("res:\n{:?}\n",response);
         stream.write_all(response.as_bytes()).unwrap();
     }
 
     fn routing(req_line: String) -> (&'static str, &'static str) {
         let index = String::from("GET / HTTP/1.1");
-        let admin_panel = String::from("GET /admin HTTP/1.1");
-        let personal_cabinet = String::from("GET /personal HTTP/1.1");
+        let log_panel = String::from("GET /logs HTTP/1.1");
+        let obsor_panel = String::from("GET /obsor HTTP/1.1");
+        let scanners_panel = String::from("GET /scanners HTTP/1.1");
+        let style = String::from("GET /styles/{cssfile} HTTP/1.1");
+
 
         //FIXME: через match было бы удобнее
-
         if req_line == index {
-            ("HTTP/1.1 200 OK", "server/www/views/index.html")
-        } else if req_line == admin_panel {
-            ("HTTP/1.1 200 OK", "server/www/views/admin.html")
-        } else if req_line == personal_cabinet {
-            ("HTTP/1.1 200 OK", "server/www/views/personal.html")
+            ("HTTP/1.1 200 OK", "www/views/index.html")
+        } else if req_line == log_panel {
+            ("HTTP/1.1 200 OK", "www/views/logs.html")
+        } else if req_line == obsor_panel {
+            ("HTTP/1.1 200 OK", "www/views/obsor.html")
+        } else if  req_line == scanners_panel {
+            ("HTTP/1.1 200 OK", "www/views/scanners.html")
+        }else if  req_line==style{
+            ("HTTP/1.1 200 OK", "www/style/{cssfile}")
         } else {
-            ("HTTP/1.1 404 NOT FOUND", "server/www/views/404.html")
+            ("HTTP/1.1 404 NOT FOUND", "www/views/404.html")
         }
     }
 }
