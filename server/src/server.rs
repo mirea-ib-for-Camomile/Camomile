@@ -55,7 +55,6 @@ impl HttpRequest {
 
         let base_dir = "./www/";
         
-        //TODO::add
         if request.method == "GET" {
 
             let filename: String = Server::routing(request.uri.clone());
@@ -180,6 +179,7 @@ impl HttpResponse {
 
         self
     }
+    //FIXME: now work media files
     pub fn file(mut self, path: String) -> Self {
         let body = fs::read_to_string(&path).unwrap();
 
